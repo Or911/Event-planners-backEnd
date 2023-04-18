@@ -6,6 +6,7 @@ const eventsSchema = new schema({
     organizer:String,
     entertainer:String,
     description:String,
+    eventDate:Date,
     price:[],
     likes:[],
     location:{ type: String, required: true},
