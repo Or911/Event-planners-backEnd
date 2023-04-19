@@ -18,10 +18,16 @@ function getEvents(category , date){
   if(category !== undefined){
     return eventsDB.find({category: category})
   }
-  if(category !== undefined && date){
+  if(date !== undefined  ){
     return eventsDB.find({date: date})
   }
   return eventsDB.find({})
 }
 
-module.exports = { addEvent , getEvents};
+function getEventByID(id){
+  return eventsDB.findById(id)
+}
+
+
+
+module.exports = { addEvent , getEvents ,getEventByID};
