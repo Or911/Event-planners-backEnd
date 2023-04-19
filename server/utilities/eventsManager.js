@@ -28,6 +28,13 @@ function getEventByID(id){
   return eventsDB.findById(id)
 }
 
+function getEventsCategory(){
+  return eventsDB.aggregate([{
+    $group: {
+      _id: "$category",
+      events:{$push : "$$ROOT"}
+    }
+  }])
+}
 
-
-module.exports = { addEvent , getEvents ,getEventByID};
+module.exports = { addEvent , getEvents , getEventsCategory , getEventByID};
