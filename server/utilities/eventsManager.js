@@ -24,4 +24,13 @@ function getEvents(category , date){
   return eventsDB.find({})
 }
 
-module.exports = { addEvent , getEvents};
+function getEventsCategory(){
+  return eventsDB.aggregate([{
+    $group: {
+      _id: "$category",
+      events:{$push : "$$ROOT"}
+    }
+  }])
+}
+
+module.exports = { addEvent , getEvents , getEventsCategory};

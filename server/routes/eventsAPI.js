@@ -15,6 +15,12 @@ router.get("/events" , function(req , res){
   .catch(()=> res.status(400).send("error"))
 })
 
+router.get("/eventsCategory" , function(req , res){
+  eventsManager.getEventsCategory()
+  .then((events) => res.status(200).send(events))
+  .catch(()=> res.status(400).send("error"))
+})
+
 router.post("/event" ,authToken , function(req , res){
   let user = req.user
   let data = req.body
