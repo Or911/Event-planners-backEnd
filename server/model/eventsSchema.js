@@ -8,7 +8,7 @@ const eventsSchema = new schema({
     description:String,
     eventDate:Date,
     price:[],
-    likes:[],
+    likes: Number,
     location:{ type: String, required: true},
     dateCreated:Date ,
     category:String,
