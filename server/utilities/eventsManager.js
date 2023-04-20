@@ -3,7 +3,7 @@ const eventsDB = require("../model/eventsSchema");
 const UsersDB = require("../model/UserSchema");
 
 function addEvent(user, data){
-  let event = new eventsDB(data)
+  let event = new eventsDB({...data , organizer : user.username})
   if(data.name ==="" || data.location==="" ){throw Error}
   event.dateCreated = Date()
   event.save()
