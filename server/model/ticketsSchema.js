@@ -1,13 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
 const ticketsSchema = new schema({
-    name:{ type: String, required: true },
+  event: { type: schema.Types.ObjectId, ref: "events" },
+  price: Number,
+});
 
-})
-
-
-const ticket = mongoose.model('ticket', ticketsSchema);
+const ticket = mongoose.model("ticket", ticketsSchema);
 module.exports = ticket;
-
-

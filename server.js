@@ -3,6 +3,7 @@ const app = express();
 const path = require("path");
 const eventsAPI = require('./server/routes/eventsAPI')
 const loginAPI = require('./server/routes/loginAPI')
+const ticketsAPI = require('./server/routes/ticketsAPI')
 const {connectToDataBase} = require('./server/utilities/DBConnection')
 //זמני
 app.use(function (req, res, next) {
@@ -18,8 +19,9 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/' , loginAPI)
 app.use('/' , eventsAPI)
+app.use('/' , ticketsAPI)
 
 const port =4000
 app.listen(port,()=>{
-    console.log(`Runing on port:  http://localhost:${port}`);
+    console.log(`Running on port:  http://localhost:${port}`);
 })
