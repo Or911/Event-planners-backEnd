@@ -12,11 +12,13 @@ const eventsSchema = new schema({
     location:{ type: String, required: true},
     dateCreated:{ type: Date, default: new Date } ,
     category:{ type: String, default: true},
-    img:String
+    img:String,
+    ticketsList :[{ type: schema.Types.ObjectId, ref: "ticket" }]
 })
 
 
 const events = mongoose.model('events', eventsSchema);
 module.exports = events;
+
 
 

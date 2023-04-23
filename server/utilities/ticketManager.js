@@ -9,6 +9,7 @@ function addTicket(user, eventId, eventPrice) {
         price : eventPrice
     });
     ticket.save().then(()=>{
+              addTicketToEvent(eventId , ticket.id)
         return addTicketToUser(user.id, ticket.id);
     });
   });
@@ -16,6 +17,9 @@ function addTicket(user, eventId, eventPrice) {
 
 function addTicketToUser(userID, listID) {
   return UsersDB.findByIdAndUpdate(userID, { $push: { ticketsArr: listID } });
+}
+function addTicketToEvent(eventId, ticketID) {
+  return eventsDB.findByIdAndUpdate(eventId, { $push: { ticketsList: ticketID } })
 }
 
 function getTickets(user , eventName) {

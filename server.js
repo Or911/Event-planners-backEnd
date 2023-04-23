@@ -4,6 +4,7 @@ const path = require("path");
 const eventsAPI = require('./server/routes/eventsAPI')
 const loginAPI = require('./server/routes/loginAPI')
 const ticketsAPI = require('./server/routes/ticketsAPI')
+const userDataAPI = require('./server/routes/userDataAPI')
 const {connectToDataBase} = require('./server/utilities/DBConnection')
 //זמני
 app.use(function (req, res, next) {
@@ -16,7 +17,7 @@ app.use(function (req, res, next) {
 connectToDataBase()
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
+app.use('/' , userDataAPI)
 app.use('/' , loginAPI)
 app.use('/' , eventsAPI)
 app.use('/' , ticketsAPI)
