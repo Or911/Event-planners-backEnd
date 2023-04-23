@@ -21,7 +21,7 @@ function getEvents(category , date){
   if(date !== undefined  ){
     return eventsDB.find({date: date , eventDate : { $gte : new Date }})
   }
-  return eventsDB.find({eventDate : { $gte : Date() } , $set: { eventDate: new Date("$$ROOT".eventDate).toLocaleString('he-IL' , {dateStyle : "full"}) } })
+  return eventsDB.find({eventDate : { $gte : Date() }})
 }
 
 function getEventByID(id){

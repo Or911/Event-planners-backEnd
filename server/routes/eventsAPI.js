@@ -24,7 +24,7 @@ router.get("/eventsCategory" , function(req , res){
 router.get("/event/:id" , function(req , res){
   let eventID = req.params.id 
   eventsManager.getEventByID(eventID)
-  .then((event) => res.status(200).send({...event , eventDate: event.eventDate.toLocaleString('he-IL' , {dateStyle : "full"}) }))
+  .then((event) => res.status(200).send(event))
   .catch(()=> res.status(400).send("error"))
 })
 
