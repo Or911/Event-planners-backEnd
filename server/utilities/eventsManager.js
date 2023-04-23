@@ -16,12 +16,12 @@ function addEventToUser(userID , listID){
 
 function getEvents(category , date){
   if(category !== undefined){
-    return eventsDB.find({category: category})
+    return eventsDB.find({category: category , eventDate : { $gte : new Date }})
   }
   if(date !== undefined  ){
-    return eventsDB.find({date: date})
+    return eventsDB.find({date: date , eventDate : { $gte : new Date }})
   }
-  return eventsDB.find({})
+  return eventsDB.find({eventDate : { $gte : Date() } , $set: { eventDate: new Date("$$ROOT".eventDate).toLocaleString('he-IL' , {dateStyle : "full"}) } })
 }
 
 function getEventByID(id){
@@ -29,12 +29,15 @@ function getEventByID(id){
 }
 
 function getEventsCategory(){
-  return eventsDB.aggregate([{
-    $group: {
+  return eventsDB.aggregate([
+    {$match: {
+      eventDate : { $gte : new Date }
+    }},
+    {$group: {
       _id: "$category",
       events:{$push : "$$ROOT"}
-    }
-  }])
+    }}
+  ])
 }
 
 module.exports = { addEvent , getEvents , getEventsCategory , getEventByID};

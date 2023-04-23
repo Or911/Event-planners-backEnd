@@ -3,15 +3,15 @@ const schema = mongoose.Schema;
 
 const eventsSchema = new schema({
     name:{ type: String, required: true },
-    organizer:String,
-    entertainer:String,
+    organizer:{ type: String, required: true },
+    entertainer:{ type: String, default: this.organizer },
     description:String,
-    eventDate:Date,
+    eventDate:{ type: Date, required: true},
     price:[],
-    likes: Number,
+    likes: { type: Number, default: 0 },
     location:{ type: String, required: true},
-    dateCreated:Date ,
-    category:String,
+    dateCreated:{ type: Date, default: new Date } ,
+    category:{ type: String, default: true},
     img:String
 })
 
