@@ -9,9 +9,15 @@ function getEventsOfUser(user) {
   return events[0].eventsArr
   })
 }
-
+function getTicketsOfEvent(id) {
+  return eventsDB.find({_id : id}).select('ticketsList').populate('ticketsList')
+  .then(tickets => {
+    console.log(tickets[0]);
+    return tickets[0]
+  })
+}
         
 
       
 
-    module.exports = {getEventsOfUser};
+    module.exports = {getEventsOfUser , getTicketsOfEvent};
