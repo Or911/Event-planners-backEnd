@@ -7,8 +7,8 @@ function addTicket(user, eventId, eventPrice) {
     let ticket = new ticketsDB({
       event: event,
       price: eventPrice,
-      qrCode : `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://localhost:4000/ticket/${this._id}}`
     });
+    ticket.qrCode = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${ticket.id}`
     ticket.save().then(() => {
       addTicketToEvent(eventId, ticket.id);
       return addTicketToUser(user.id, ticket.id);
