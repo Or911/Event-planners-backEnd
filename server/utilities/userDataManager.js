@@ -12,8 +12,7 @@ function getEventsOfUser(user) {
 function getTicketsOfEvent(id) {
   return eventsDB.find({_id : id}).select('ticketsList').populate('ticketsList')
   .then(tickets => {
-    console.log(tickets[0]);
-    return tickets[0]
+    return tickets[0].ticketsList
   })
 }
         
