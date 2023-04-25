@@ -16,4 +16,14 @@ router.get('/userEvent/:id',authToken , function (req, res) {
     .then(eventsUser => res.send(eventsUser))
 })
 
+router.post('/confirmTicket',authToken , function (req, res) {
+    let eventID = req.body.eventID
+    let ticketID = req.body.ticketID
+    console.log(eventID)
+    console.log(ticketID);
+    // userDataManager.getTicketsOfEvent(eventID)
+    // .then(eventsUser => res.send(eventsUser))
+})
+
+
 module.exports = router;
