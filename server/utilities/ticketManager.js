@@ -10,8 +10,9 @@ function addTicket(user, eventId, eventPrice) {
     });
     ticket.qrCode = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${ticket.id}`
     ticket.save().then(() => {
-      addTicketToEvent(eventId, ticket.id);
-      return addTicketToUser(user.id, ticket.id);
+      return addTicketToEvent(eventId, ticket.id).then(()=>{
+        return addTicketToUser(user.id, ticket.id);
+      })
     });
   });
 }
