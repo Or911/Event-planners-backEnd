@@ -24,4 +24,16 @@ router.post("/ticket" , authToken , function(req , res){
   .catch(()=> res.status(400).send("error"))
 })
 
+router.get('/ticket/:id' ,authToken, function(req, res) {
+  let ticketId = req.params.id
+  let isTicketScanned = ticketManager.updateScannedTicket(ticketId)
+
+  if(isTicketScanned){
+    res.status(400).send({Message : 'Ticket already Scanned'})
+  }else{
+    res.status(200).send({Message : 'Ticket Scanned Successfully'})
+  }
+
+})
+
 module.exports = router;
