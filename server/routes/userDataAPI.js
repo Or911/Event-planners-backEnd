@@ -19,7 +19,6 @@ router.get('/userEvent/:id',authToken , function (req, res) {
 router.post('/confirmTicket',authToken , function (req, res) {
     let eventID = req.body.eventID
     let ticketID = req.body.ticketID
-    console.log(eventID)
     userDataManager.ifTicketIsExists(eventID , ticketID)
     .then(result =>{
         if(!result){ return res.status(401).send({error:"כרטיס לא תקין"})}
