@@ -16,9 +16,5 @@ const eventsSchema = new schema({
     ticketsList :[{ type: schema.Types.ObjectId, ref: "ticket" }]
 })
 
-
 const events = mongoose.model('events', eventsSchema);
 module.exports = events;
-
-
-
