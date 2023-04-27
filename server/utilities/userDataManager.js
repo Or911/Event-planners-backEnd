@@ -1,4 +1,3 @@
-const events = require('../model/eventsSchema');
 const eventsDB = require('../model/eventsSchema')
 const UsersDB = require("../model/UserSchema");
 const ticketsDB = require("../model/ticketsSchema");
@@ -17,17 +16,24 @@ function getTicketsOfEvent(id) {
   })
 }
 
+function ifTicketIsExists(eventID , ticketID){
+ return ticketsDB.findById(ticketID).then(result =>{
+    if(result.event == eventID){
+      return true
+    }
+  })
+}
 
 function updateScannedTicket(ticketId) {
-  ticketsDB.findById(ticketId).then(function (ticket) {
-    if (ticket.isScanned) {
-      return true;
+ return ticketsDB.findById(ticketId).then(function (ticket) {
+    if (ticket.isScanned === true) {
+      return false;
     }
-
-    ticketsDB.findByIdAndUpdate(ticketId, { isScanned: true });
-    return false;
-  });
+   return ticketsDB.findByIdAndUpdate(ticketId, { isScanned: true }).then(resul =>{
+      return true;
+    })
+  })
 }
       
 
-module.exports = {getEventsOfUser , getTicketsOfEvent , updateScannedTicket};
+module.exports = {getEventsOfUser , getTicketsOfEvent , ifTicketIsExists, updateScannedTicket};

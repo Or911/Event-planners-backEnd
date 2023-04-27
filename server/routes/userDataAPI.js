@@ -20,12 +20,14 @@ router.post('/confirmTicket',authToken , function (req, res) {
     let eventID = req.body.eventID
     let ticketID = req.body.ticketID
     console.log(eventID)
-    console.log(ticketID);
-    // userDataManager.updateScannedTicket(ticketID).then((response)=>{
-    //     console.log(response)
-    // })
-    // userDataManager.getTicketsOfEvent(eventID)
-    // .then(eventsUser => res.send(eventsUser))
+    userDataManager.ifTicketIsExists(eventID , ticketID)
+    .then(result =>{
+        if(!result){ return res.status(401).send({error:"כרטיס לא תקין"})}
+        userDataManager.updateScannedTicket(ticketID).then((response)=>{
+            if(response === true){ res.send({success: "הכרטיס תוקף"})}
+            else {return res.status(401).send({error:"הכרטיס שומש"})}
+        })
+    })
 })
 
 
