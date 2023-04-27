@@ -5,26 +5,24 @@ const router = express.Router();
 
 const authToken = securityManager.authenticateToken
 
+router.get("/events", function(req, res) {
+  let category = req.query.category === '' ? null : req.query.category;
+  let date = req.query.date === undefined ? new Date() : req.query.date;
+  let id = req.query.id;
 
-router.get("/events" , function(req , res){
-  let category = req.body.category 
-  let date = req.body.date
-  
-  eventsManager.getEvents(category , date)
-  .then((events) => res.status(200).send(events))
-  .catch(()=> res.status(400).send("error"))
-})
-
-router.get("/eventsCategory" , function(req , res){
-
-  let category = req.query.category === '' ? null : req.query.category
-  let date = req.query.date === undefined ? new Date : req.query.date
-  let id = req.query.id
-
-  eventsManager.getEventsCategory(category , date , id)
-  .then((events) => res.status(200).send(events))
-  .catch(()=> res.status(400).send("error"))
-})
+  eventsManager.getEvents(category, date, id)
+  .then((events) => {
+    if (events.length === 0) {
+      res.status(404).send("No events found for the specified category, date, and id.");
+    } else {
+      res.status(200).send(events);
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send("Internal server error.");
+  });
+});
 
 router.get("/event/:id" , function(req , res){
   let eventID = req.params.id 
