@@ -42,19 +42,4 @@ function getEventByID(id) {
   return eventsDB.findById(id);
 }
 
-function getTicketByID(id) {
-  return ticketsDB.findById(id);
-}
-
-function updateScannedTicket(ticketId) {
-  getTicketByID(ticketId).then(function (ticket) {
-    if (ticket.isScanned) {
-      return true;
-    }
-
-    ticketsDB.findByIdAndUpdate(ticketId, { isScanned: true });
-    return false;
-  });
-}
-
-module.exports = { addTicket, getTickets, updateScannedTicket };
+module.exports = { addTicket, getTickets};

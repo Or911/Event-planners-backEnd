@@ -28,16 +28,20 @@ function getEventByID(id){
   return eventsDB.findById(id)
 }
 
-function getEventsCategory(){
-  return eventsDB.aggregate([
+function getEventsCategory(category , date , id){
+  const aggregateFormat = [
     {$match: {
-      eventDate : { $gte : new Date }
+      eventDate : { $gte : date },
     }},
     {$group: {
-      _id: "$category",
+      _id: `$${id}`,
       events:{$push : "$$ROOT"}
     }}
-  ])
+  ]
+
+  category ? aggregateFormat[0].$match.category = category : null
+
+  return eventsDB.aggregate(aggregateFormat)
 }
 
 module.exports = { addEvent , getEvents , getEventsCategory , getEventByID};

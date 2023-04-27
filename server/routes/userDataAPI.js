@@ -21,6 +21,9 @@ router.post('/confirmTicket',authToken , function (req, res) {
     let ticketID = req.body.ticketID
     console.log(eventID)
     console.log(ticketID);
+    // userDataManager.updateScannedTicket(ticketID).then((response)=>{
+    //     console.log(response)
+    // })
     // userDataManager.getTicketsOfEvent(eventID)
     // .then(eventsUser => res.send(eventsUser))
 })

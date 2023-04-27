@@ -16,7 +16,12 @@ router.get("/events" , function(req , res){
 })
 
 router.get("/eventsCategory" , function(req , res){
-  eventsManager.getEventsCategory()
+
+  let category = req.query.category === '' ? null : req.query.category
+  let date = req.query.date === undefined ? new Date : req.query.date
+  let id = req.query.id
+
+  eventsManager.getEventsCategory(category , date , id)
   .then((events) => res.status(200).send(events))
   .catch(()=> res.status(400).send("error"))
 })
