@@ -41,4 +41,19 @@ router.post("/event" ,authToken , function(req , res){
   .catch(()=> res.status(400).send("error"))
 })
 
+router.delete("/event/:id", authToken, function(req, res) {
+  let user = req.user;
+  let eventId = req.params.id;
+
+  eventsManager.deleteEventByID(user, eventId)
+    .then((deleted) => {
+      res.status(201).send(deleted);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(400).send(error.message);
+    });
+});
+
+
 module.exports = router;

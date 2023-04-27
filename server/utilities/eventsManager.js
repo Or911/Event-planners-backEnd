@@ -44,4 +44,17 @@ function getEventsCategory(category , date , id){
   return eventsDB.aggregate(aggregateFormat)
 }
 
-module.exports = { addEvent , getEvents , getEventsCategory , getEventByID};
+function deleteEventByID(user, eventId) {
+  return eventsDB.findByIdAndDelete(eventId)
+    .then((deletedEvent) => {
+      if (!deletedEvent) {
+        throw new Error('Event not found');
+      }
+      return UsersDB.updateOne({ username: user.username }, { $pull: { eventsArr: eventId } })
+        .then(() => {
+          return deletedEvent;
+        });
+    });
+}
+
+module.exports = { addEvent , getEvents , getEventsCategory , getEventByID , deleteEventByID};
