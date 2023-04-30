@@ -7,7 +7,7 @@ const authToken = securityManager.authenticateToken
 
 router.get("/events", function(req, res) {
   let category = req.query.category === '' ? null : req.query.category;
-  let date = req.query.date === undefined ? new Date() : req.query.date;
+  let date = req.query.date === '' ? new Date() : new Date(req.query.date);
   let id = req.query.id;
 
   eventsManager.getEvents(category, date, id)

@@ -22,7 +22,7 @@ function getEvents(category, date, id) {
   const aggregateFormat = [
     {
       $match: {
-        eventDate: { $gte: new Date() },
+        eventDate: { $gte: date },
       },
     },
     {
