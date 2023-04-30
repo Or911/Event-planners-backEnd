@@ -6,7 +6,7 @@ const ticketsDB = require("../model/ticketsSchema");
 function getEventsOfUser(user) {
   return UsersDB.find({_id : user.id}).select('eventsArr').populate('eventsArr')
   .then(events => {
-  return events[0].eventsArr
+  return events[0]?.eventsArr
   })
 }
 function getTicketsOfEvent(id) {
